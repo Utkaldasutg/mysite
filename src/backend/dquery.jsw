@@ -1,0 +1,86 @@
+// Filename: backend/dquery.jsw (web modules need to have a .jsw extension)
+
+import wixData from 'wix-data';
+
+export function search(id) {
+    //let id1 = id.toString();
+    return wixData.query("myCollection")
+	
+    
+	.eq("iden", id)
+	.find()
+    
+	.then( (results) => {
+		console.log(id)
+		if(results.totalCount>0){
+			let a=results.items[0,0].title;
+			return a;
+			
+
+		}else{
+			
+			return "No Such candidate found, for more information contact us at info.technomekanics@gmail.com";
+		}
+	
+	/*if(id===8) {
+     return results.items[1]; //see item below
+    } else {
+      return "NORESULTS";// handle case where no matching items found
+    }*/
+  } )
+  .catch( (err) => {
+    let errorMsg = err;
+  } );
+	
+  
+
+}
+
+
+
+// ...
+
+
+
+/*  firstItem is:
+ *
+ *  {
+ *    "_id":          "00001",
+ *    "_owner":       "ffdkj9c2-df8g-f9ke-lk98-4kjhfr89keedb",
+ *    "_createdDate": "2017-05-24T12:33:18.938Z",
+ *    "_updatedDate": "2017-05-24T12:33:18.938Z",
+ *    "title":        "Mr.",
+ *    "first_name":   "John",
+ *    "last_name":    "Doe"
+ *  }
+ */
+/*  firstItem is:
+ *
+ *  {
+ *    "_id":          "00001",
+ *    "_owner":       "ffdkj9c2-df8g-f9ke-lk98-4kjhfr89keedb",
+ *    "_createdDate": "2017-05-24T12:33:18.938Z",
+ *    "_updatedDate": "2017-05-24T12:33:18.938Z",
+ *    "title":        "Mr.",
+ *    "first_name":   "John",
+ *    "last_name":    "Doe"
+ *  }
+ */
+
+//Use the following code in one of your site's front-end files
+//to call the multiply function from backend/dquery.jsw.
+
+/* 
+import {multiply} from 'backend/dquery';
+
+$w.onReady(function () {
+	
+	multiply(4,5).then(product => {
+	    console.log(product);
+	      // Logs: 20
+	})
+	.catch(error => {
+		console.log(error);
+	});
+});
+*/
